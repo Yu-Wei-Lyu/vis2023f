@@ -63,30 +63,38 @@ function createArray(length) {
     return arr;
 }
 
-a1 = createArray();     // [] or new Array()
-//alert(a1);
+admission_year_array = createArray(2);     // [] or new Array()
+admission_year_array = ['111', '112']
 
-class_number = createArray(5, 2);    // new Array(2)
-class_number[0] = ['資工系', '590']
-class_number[1] = ['資工所', '598']
-class_number[2] = ['電資AI', 'C52']
-class_number[3] = ['電資資安', 'C53']
-class_number[4] = ['創新AI', 'C71']
-//alert(a2);
+class_type = createArray(5, 2);    // new Array(2)
+class_type[0] = ['資工系', '590']
+class_type[1] = ['資工所', '598']
+class_type[2] = ['電資AI', 'C52']
+class_type[3] = ['電資資安', 'C53']
+class_type[4] = ['創新AI', 'C71']
 
+student_quantity = 120
+info_columns = 13
 
-score_rows = createArray(10, 13); // [new Array(2),
+score_rows = createArray(120, 13); // [new Array(2),
                    //  new Array(2),
                    //  new Array(2)]
 //alert(score_rows);
 
 score_rows[0] = ['序號', '班級', '學號', '姓名', 'GitHub', '作業一', '作業二', '作業三', '作業四', '作業五', '作業六', '作業七', '作業八', '作業九', '作業十']
 
-for (var i = 1; i < score_rows.length; i++) {
-    random_class_info = class_number[Math.floor(Math.random() * 5)]
+student_info = createArray(student_quantity + 1, 2)
+
+for (var i = 1; i < score_rows.length; ++i) {
+    random_class_info = class_type[Math.floor(Math.random() * class_type.length)]
+    class_name = random_class_info[0]
+    class_code = random_class_info[1]
+    admission_year = admission_year_array[Math.floor(Math.random() * admission_year_array.length)]
+    random_serial_num = String(Math.floor(Math.random() * 999)).padStart(3, '0')
+    student_id = admission_year + class_code + random_serial_num
     score_rows[i][0] = i;
-    score_rows[i][1] = random_class_info[0];
-    score_rows[i][2] = 112598000 + Math.floor(Math.random() * 999);
+    score_rows[i][1] = class_name;
+    score_rows[i][2] = student_id;
     //score_rows[i][1] = '路人甲'; // 4E00-9FFF
     //score_rows[i][1] = String.fromCharCode(0x6771);
     score_rows[i][3] = String.fromCharCode(Math.floor(Math.random() * 0x51ff + 0x4e00)) +
@@ -102,7 +110,7 @@ for (var i = 1; i < score_rows.length; i++) {
     score_rows[i][4] = (Math.random() + 1).toString(36).substring(2);
 
     
-    for (var j = 5; j < score_rows[0].length; j++) {
+    for (var j = 5; j < score_rows[0].length; ++j) {
         score_rows[i][j] = Math.floor(Math.random() * 10);
     }
 }
@@ -134,69 +142,88 @@ for (let row of score_rows) {
 //append the compiled table to the DOM
 document.body.appendChild(table);
 
+function tableToCSV() {
 
+    // Variable to store the final csv data
+    var csv_data = [];
 
+    // Get each row data
+    var rows = document.getElementsByTagName('tr');
+    for (var i = 0; i < rows.length; i++) {
 
+        // Get each column data
+        var cols = rows[i].querySelectorAll('td,th');
 
-        function tableToCSV() {
- 
-            // Variable to store the final csv data
-            var csv_data = [];
- 
-            // Get each row data
-            var rows = document.getElementsByTagName('tr');
-            for (var i = 0; i < rows.length; i++) {
- 
-                // Get each column data
-                var cols = rows[i].querySelectorAll('td,th');
- 
-                // Stores each csv row data
-                var csvrow = [];
-                for (var j = 0; j < cols.length; j++) {
- 
-                    // Get the text data of each cell
-                    // of a row and push it to csvrow
-                    csvrow.push(cols[j].innerHTML);
-                }
- 
-                // Combine each column value with comma
-                csv_data.push(csvrow.join(","));
-            }
- 
-            // Combine each row data with new line character
-            csv_data = csv_data.join('\n');
- 
-            // Call this function to download csv file 
-            downloadCSVFile(csv_data);
- 
+        // Stores each csv row data
+        var csvrow = [];
+        for (var j = 0; j < cols.length; j++) {
+
+            // Get the text data of each cell
+            // of a row and push it to csvrow
+            csvrow.push(cols[j].innerHTML);
         }
- 
-        function downloadCSVFile(csv_data) {
- 
-            // Create CSV file object and feed
-            // our csv_data into it
-            CSVFile = new Blob([csv_data], {
-                type: "text/csv"
-            });
- 
-            // Create to temporary link to initiate
-            // download process
-            var temp_link = document.createElement('a');
- 
-            // Download csv file
-            temp_link.download = "data.csv";
-            var url = window.URL.createObjectURL(CSVFile);
-            temp_link.href = url;
- 
-            // This link should not be displayed
-            temp_link.style.display = "none";
-            document.body.appendChild(temp_link);
- 
-            // Automatically click the link to
-            // trigger download
-            temp_link.click();
-            document.body.removeChild(temp_link);
+
+        // Combine each column value with comma
+        csv_data.push(csvrow.join(","));
+    }
+
+    // Combine each row data with new line character
+    csv_data = csv_data.join('\n');
+
+    // Call this function to download csv file 
+    downloadCSVFile(csv_data);
+
+}
+
+function downloadCSVFile(csv_data) {
+
+    // Create CSV file object and feed
+    // our csv_data into it
+    CSVFile = new Blob([csv_data], {
+        type: "text/csv"
+    });
+
+    // Create to temporary link to initiate
+    // download process
+    var temp_link = document.createElement('a');
+
+    // Download csv file
+    temp_link.download = "data.csv";
+    var url = window.URL.createObjectURL(CSVFile);
+    temp_link.href = url;
+
+    // This link should not be displayed
+    temp_link.style.display = "none";
+    document.body.appendChild(temp_link);
+
+    // Automatically click the link to
+    // trigger download
+    temp_link.click();
+    document.body.removeChild(temp_link);
+}
+
+function quickSort(arr) {
+    if (arr.length <= 1) {
+        return arr; // 少於2個元素 不進行排序
+    }
+
+    const sort_by_element = 1
+    const pivot = arr[0][sort_by_element]; // 選擇第一個元素作為基準點
+    const left = [];
+    const right = [];
+
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i][sort_by_element] < pivot) {
+            left.push(arr[i]); // 小於基準點的放左邊
+        } else {
+            right.push(arr[i]); // 大於基準點的放右邊
         }
+    }
+
+    // 遞歸排序左右兩部分，然後將排序後的左半部分、基準點、右半部分組合起來
+    return quickSort(left).concat(pivot, quickSort(right));
+}
+
     </script>
 </body>
  
