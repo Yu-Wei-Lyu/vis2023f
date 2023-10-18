@@ -31,7 +31,7 @@ let class_type = [
 let student_quantity = 120;
 let info_columns = 13;
 let score_rows = createArray(student_quantity + 1, info_columns);
-score_rows[0] = ['序號', '班級', '學號', '姓名', 'GitHub', '作業一', '作業二', '作業三', '作業四', '作業五', '作業六', '作業七', '作業八', '作業九', '作業十']
+score_rows[0] = ['序號', '班級', '學號', '姓名', 'GitHub 帳號', '作業一', '作業二', '作業三', '作業四', '作業五', '作業六', '作業七', '作業八', '作業九', '作業十']
 
 // Add random data into student rows
 for (var i = 1; i < score_rows.length; i++) {
