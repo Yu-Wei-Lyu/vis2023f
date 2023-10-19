@@ -42,6 +42,7 @@ d3.text("./csv/data.csv", function (data) {
 
     var container = d3.select("#div2")
         .append("table")
+        .attr("id", "score-table")
         .selectAll("tr")
         .data(parsedCSV)
         .enter()
@@ -54,11 +55,17 @@ d3.text("./csv/data.csv", function (data) {
                 // return '<a href="https://' + d + '.github.io/vis2023f/" target="_blank"><img src="https://' + d + '.github.io/vis2023f/hw00/me.jpg"></a>' + '<hr><a href="https://github.com/' + d + '/vis2023f/" target="_blank">' + d + '</a>';
                 return '<a href="https://github.com/' + d + '/vis2023f/" target="_blank">' + d + '</a>';
             }
+            else if ( i == 3 && d != "姓名") {
+                d3.select(this).attr("class", "clear-font");
+                return d;
+            }
             else if ( i == 0 || i == 2 || isNaN(d)) {
                 return d;
             }
         })
-        .filter(function (d, i) { return (i > 2 && !isNaN(d) && d != ""); })
+        .filter(function (d, i) {
+            return (i > 2 && !isNaN(d) && d != ""); 
+        })
         .attr("class", function (d, i) { 
             if (d == 10) return "excellent-kid"; 
             else if (d >= 7 ) return "good-kid"; 
