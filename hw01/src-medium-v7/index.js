@@ -22,9 +22,9 @@ d3.select("#div1")
     .attr("width",  function(d, i) { return (i + 1) * 60; })
     .attr("height", function(d, i) { return (i + 1) * 60; });
 
-d3.text("../data/csv/data.csv", function (data) {
+d3.text("../data/csv/data.csv").then(function (data) {
     //console.log(data)
-    parsedCSV = d3.csv.parseRows(data);
+    parsedCSV = d3.csvParseRows(data);
     //console.log(parsedCSV);
 
     var container = d3.select("#div2")

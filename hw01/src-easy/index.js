@@ -51,9 +51,6 @@ for (var i = 1; i < score_rows.length; i++) {
         score_rows[i][j] = RandomInt(0, 10);
     }
 }
-//alert(score_rows);
-
-
 
 // https://medium.com/wdstack/quick-blurb-generating-a-table-from-an-array-in-javascript-41386fd449a9
 //setup our table array
