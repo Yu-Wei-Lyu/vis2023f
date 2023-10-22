@@ -63,13 +63,13 @@ d3.text("../data/csv/data.csv").then(function (data) {
         .attr("y", (d, i) => y(d.data.姓名))
         .attr("width", d => x(d[1]) - x(d[0]))
         .attr("height", y.bandwidth())
-        // .append("title")
-        // .text(d => `${d.data.name} ${d.key} ${formatValue(d.data[d.key])});`)
+        .append("title")
+        .text(d => `${d.data.name} ${d.key} ${formatValue(d.data[d.key])});`)
     
     score_svg.select("#chart")
     
-    score_svg.append("g")
-    .call(xAxis);
+    // score_svg.append("g")
+    // .call(xAxis);
 
     score_svg.append("g")
     .call(yAxis);
@@ -98,11 +98,14 @@ d3.text("../data/csv/data.csv").then(function (data) {
             }
         });
     
-    d3.select("#div2").node().appendChild(score_svg.node());
+    d3.select("#div2")
+        .attr("class", "div-hint")
+        .node().appendChild(score_svg.node());
 
+    hint_block_height = 10
     hint_block_width = 50
     hint_svg = d3.create("svg")
-        .attr("viewBox", [0, 0, hint_block_width*10, 50])
+        .attr("viewBox", [0, 0, hint_block_width*10, hint_block_height])
     console.log(parsed_csv.columns.slice(5))
     hint_svg.append("g")
         .attr("id", "score-hint")
@@ -113,7 +116,7 @@ d3.text("../data/csv/data.csv").then(function (data) {
         .attr("x", (d, i) => (i) * hint_block_width)
         .attr("y", 0)
         .attr("width", hint_block_width)
-        .attr("height", 10)
+        .attr("height", hint_block_height)
     
     //添加 text 元素，確保它在 rect 之後
     hint_svg.select("#score-hint")
@@ -126,11 +129,13 @@ d3.text("../data/csv/data.csv").then(function (data) {
         .attr("font-size", 8)
         .attr("fill", "white")
         .text(d => d);
-    
+
     d3.select("#div1")
+        .attr("class", "div-hint")
+        .attr("style", null)
         .append("text")
         .text("作業顏色對照表")
-    d3.select("#div1").append("div").attr("style", null).node().appendChild(hint_svg.node());
+        .node().appendChild(hint_svg.node());
 });
 
 //***************************************************
