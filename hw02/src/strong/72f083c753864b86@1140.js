@@ -11,14 +11,42 @@ function _constellationChinese(){return(
 )}
 
 function _barChartData(){return(
-new Array(function() {})
+new Array(function(){})
 )}
 
-function _histogramOrder(){return(
-new Object()
+function _constellationOrder(){return(
+new Array(function(){})
 )}
 
-function _6(barChartData,constellationChinese,data,createHistogramOrder)
+function _genderCountOrder(){return(
+new Array(function(){})
+)}
+
+function _createHistogramOrder(constellationOrder,genderCountOrder,barChartData,pushToHistogramOrder){return(
+function createHistogramOrder() {
+  constellationOrder.length = 0;
+  genderCountOrder.length = 0;
+  var i = 1;
+  while(i !== barChartData.length) {
+    pushToHistogramOrder(barChartData[i], Math.floor(i/2));
+    i += 2;
+    if (i > barChartData.length) {
+      i = 0;
+    }
+  }
+}
+)}
+
+function _pushToHistogramOrder(constellationOrder,constellationChinese,genderCountOrder){return(
+function pushToHistogramOrder(barChartItem, constellationIndex) {
+  if (barChartItem.count !== 0) {
+    constellationOrder.push(constellationChinese[constellationIndex]);
+    genderCountOrder.push(`${barChartItem.gender == "female" ? "女" : "男"} (${barChartItem.count})`);
+  }
+}
+)}
+
+function _9(barChartData,constellationChinese,data,createHistogramOrder)
 {
   barChartData.length = 0;
   for (var i = 0; i < constellationChinese.length; i++) {
@@ -34,34 +62,7 @@ function _6(barChartData,constellationChinese,data,createHistogramOrder)
 }
 
 
-function _createHistogramOrder(histogramOrder,barChartData,pushToHistogramOrder){return(
-function createHistogramOrder() {
-  histogramOrder.constellationOrder = [];
-  histogramOrder.genderCountOrder = [];
-  var constellationPointer = 0;
-  for (var i = 1; i < barChartData.length; i += 2) {
-    pushToHistogramOrder(barChartData[i], constellationPointer);
-    constellationPointer++;
-  }
-  constellationPointer = 0;
-  for (var i = 0; i < barChartData.length; i += 2) {
-    pushToHistogramOrder(barChartData[i], constellationPointer);
-    constellationPointer++;
-  }
-  return histogramOrder;
-}
-)}
-
-function _pushToHistogramOrder(histogramOrder,constellationChinese){return(
-function pushToHistogramOrder(barChartItem, constellationPointer) {
-  if (barChartItem.count !== 0) {
-    histogramOrder.constellationOrder.push(constellationChinese[constellationPointer]);
-    histogramOrder.genderCountOrder.push(`${barChartItem.gender == "female" ? "女" : "男"} (${barChartItem.count})`);
-  }
-}
-)}
-
-function _9(Plot,constellationChinese,barChartData){return(
+function _10(Plot,constellationChinese,barChartData){return(
 Plot.plot({
   x: {
     grid: true,
@@ -96,7 +97,7 @@ Plot.plot({
 })
 )}
 
-function _10(Plot,constellationChinese,data,histogramOrder){return(
+function _11(Plot,constellationChinese,data,constellationOrder,genderCountOrder){return(
 Plot.plot({
   x: { // 找好久的tick設定: https://observablehq.com/plot/marks/axis#axis-mark
     grid: true,
@@ -118,11 +119,11 @@ Plot.plot({
         fill: "Gender",
         channels: {
           constellation: {
-            value: histogramOrder.constellationOrder,
+            value: constellationOrder,
             label: "Constellation"
           },
           gender: {
-            value: histogramOrder.genderCountOrder,
+            value: genderCountOrder,
             label: "gender"
           }
         },
@@ -150,11 +151,12 @@ export default function define(runtime, observer) {
   main.variable(observer("data")).define("data", ["FileAttachment"], _data);
   main.variable(observer("constellationChinese")).define("constellationChinese", _constellationChinese);
   main.variable(observer("barChartData")).define("barChartData", _barChartData);
-  main.variable(observer("histogramOrder")).define("histogramOrder", _histogramOrder);
-  main.variable(observer()).define(["barChartData","constellationChinese","data","createHistogramOrder"], _6);
-  main.variable(observer("createHistogramOrder")).define("createHistogramOrder", ["histogramOrder","barChartData","pushToHistogramOrder"], _createHistogramOrder);
-  main.variable(observer("pushToHistogramOrder")).define("pushToHistogramOrder", ["histogramOrder","constellationChinese"], _pushToHistogramOrder);
-  main.variable(observer()).define(["Plot","constellationChinese","barChartData"], _9);
-  main.variable(observer()).define(["Plot","constellationChinese","data","histogramOrder"], _10);
+  main.variable(observer("constellationOrder")).define("constellationOrder", _constellationOrder);
+  main.variable(observer("genderCountOrder")).define("genderCountOrder", _genderCountOrder);
+  main.variable(observer("createHistogramOrder")).define("createHistogramOrder", ["constellationOrder","genderCountOrder","barChartData","pushToHistogramOrder"], _createHistogramOrder);
+  main.variable(observer("pushToHistogramOrder")).define("pushToHistogramOrder", ["constellationOrder","constellationChinese","genderCountOrder"], _pushToHistogramOrder);
+  main.variable(observer()).define(["barChartData","constellationChinese","data","createHistogramOrder"], _9);
+  main.variable(observer()).define(["Plot","constellationChinese","barChartData"], _10);
+  main.variable(observer()).define(["Plot","constellationChinese","data","constellationOrder","genderCountOrder"], _11);
   return main;
 }

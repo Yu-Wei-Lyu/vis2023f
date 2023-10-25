@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- D3, jquery -->
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="utf-8"></script>
 
 <!-- Bootstrap CSS -->
@@ -17,8 +17,13 @@
 <!-- https://alexlenail.me/NN-SVG/about.html -->
 <link rel="icon" href="../hw00/favicon.svg"/>
 <style type="text/css">
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap');
-
+  /* @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap');*/
+  /*
+  @font-face {
+    font-family:'CircleFont'; 
+    src: url(../hw01/data/font/CircleFont_v2.woff2);
+  }
+  */
   table {
   border-collapse: collapse;
   border: 2px solid white; /* rgba(217,140,144,1) */
@@ -178,30 +183,25 @@
 <!-- ------------------------------------------------>
 <div class="row hw12">
   <div class="col-md-12 twenty">
-    Simple baseline 程式碼，請放在 https://github.com/
-    <span style="color:red;">Yu-Wei-Lyu</span>
-    /vis2023f/hw
-    <span style="color:red;">02</span>
-    /src/simple 檔案夾。
+    Simple baseline 程式碼，請放在 https://github.com/<span style="color:red;">Yu-Wei-Lyu</span>/vis2023f/hw<span style="color:red;">02</span>/src/simple 檔案夾。
     <br>
-    
     <hr>
-    Medium baseline 程式碼，請放在 https://github.com/
-    <span style="color:red;">Yu-Wei-Lyu</span>
-    /vis2023f/hw
-    <span style="color:red;">02</span>
-    /src/medium 檔案夾。
+    Medium baseline 程式碼，請放在 https://github.com/<span style="color:red;">Yu-Wei-Lyu</span>/vis2023f/hw<span style="color:red;">02</span>/src/medium 檔案夾。
     <br>
-    
     <hr>
-    Strong baseline 程式碼，請放在 https://github.com/
-    <span style="color:red;">Yu-Wei-Lyu</span>
-    /vis2023f/hw
-    <span style="color:red;">02</span>
-    /src/strong 檔案夾。
+    Strong baseline 程式碼，請放在 https://github.com/<span style="color:red;">Yu-Wei-Lyu</span>/vis2023f/hw<span style="color:red;">02</span>/src/strong 檔案夾。
     <br>
-    
   </div>
+</div>
+
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      打開作品集資料夾 (GitHub 倉庫 vis2023f 傳送門) 
+      <hr>
+      <input type="button" name="back" onclick="location.href='https://github.com/Yu-Wei-Lyu/vis2023f'" value="按我  ٩(｡・ω・｡)و   前往倉庫"> 
+      <!--記得將 tjhsieh 改成你的 GitHub 帳號 ------------------------------------------------>
+    </div>
 </div>
 
 <!-- ------------------------------------------------>
@@ -215,11 +215,11 @@
 <!-- ------------------------------------------------>
 <div class="row hw12">
   <div class="col-md-12 twenty">
-    <a href="https://你的帳號.github.io/vis2023f/hw02/src/simple/">https://你的帳號.github.io/vis2023f/hw02/src/simple/</a>
+    <a href="https://yu-wei-lyu.github.io/vis2023f/hw02/src/simple/">https://yu-wei-lyu.github.io/vis2023f/hw02/src/simple/</a>
     <hr>
-    <a href="https://你的帳號.github.io/vis2023f/hw02/src/medium/">https://你的帳號.github.io/vis2023f/hw02/src/medium/</a>   
+    <a href="https://yu-wei-lyu.github.io/vis2023f/hw02/src/medium/">https://yu-wei-lyu.github.io/vis2023f/hw02/src/medium/</a>   
     <hr>
-    <a href="https://你的帳號.github.io/vis2023f/hw02/src/medium/">https://你的帳號.github.io/vis2023f/hw02/src/strong/</a>
+    <a href="https://yu-wei-lyu.github.io/vis2023f/hw02/src/medium/">https://yu-wei-lyu.github.io/vis2023f/hw02/src/strong/</a>
     </div>
 </div>
 
@@ -228,6 +228,8 @@
 
   <div class="row hw12">
     <div class="col-md-12 twenty">
+      心得報告
+      <hr>
       心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。
     </div>
   </div>
@@ -242,36 +244,93 @@
           <th>配分</th>
           <th>分項描述</th>
         </tr>
+
         <tr>
-          <td rowspan="7" id="myTotal"></td>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox1"></td>
+          <td rowspan="16" id="myTotal"></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox1" checked="checked"></td>
           <td id='m1'>2</td>
-          <td>Simple baseline - 描述、描述、描述</td>
+          <td>Simple baseline-1 - 以histogram呈現每個年份出生的人數</td>
         </tr>
-        <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked></td>
-          <td id='m2'>6</td>
-          <td>Medium baseline - 描述、描述、描述 </td>
+
+         <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked="checked"></td>
+          <td id='m2'>2</td>
+          <td>Simple baseline-2 - 可調整margin, fill color, tip</td>
         </tr>
+        
         <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox3"></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox3" checked="checked"></td>
           <td id='m3'>2</td>
-          <td>Strong baseline - 描述、描述、描述 </td>
+          <td>Medium baseline-1 - 以bar chart呈現每個年份出生的人數</td>
         </tr>
+
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox4" checked="checked"></td>
+          <td id='m4' >2</td>
+          <td>Medium baseline-2 - 可調整margin, fill color, tip </td>
+        </tr>
+        
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox5" checked="checked"></td>
+          <td id='m5' >1</td>
+          <td>Strong baseline-1 - 以bar chart呈現每個星座的人數 </td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox6" checked="checked"></td>
+          <td id='m6' >1</td>
+          <td>Strong baseline-2 - 以histogram呈現每個星座的人數 </td>
+        </tr>
+        
       </table>
+
     </div>
   </div>
 
-  <!-- ------------------------------------------------>
-  <div class="row hw12">
-    <div class="col-md-12 twenty">
-      <video id="video1" style="width:100%;max-width:100%;" controls="">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      </video>
-    </div>
+<!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+     <h4>Simple baseline - 以 histogram 呈現每個年份出生的人數，可調整margin, fill color, tip</h4>
   </div>
+</div>
 
-  <!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+    <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+    src="https://observablehq.com/embed/7c896cc3989b6ac3@105?cell=*&api_key=93f9fee0bd712a53b69dc9307b64e62809c570f6"></iframe>
+  </div>
+</div>
+
+<!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+     <h4>Medium baseline - 以 bar chart 呈現每個年份出生的人數，可調整margin, fill color, tip</h4>
+  </div>
+</div>
+
+<div class="row hw12">
+  <div>
+    <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+    src="https://observablehq.com/embed/c9da37a494e5d1f3@121?cell=*&api_key=717b747a9033e73df837c9654aaf1c85d8f5b326"></iframe>
+  </div>
+</div>
+
+<!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+     <h4>Strong baseline - 分別以 bar chart 和 histogram 呈現每個星座的人數</h4>
+  </div>
+</div>
+
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+    <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF;"
+    src="https://observablehq.com/embed/72f083c753864b86@1140?cell=*&api_key=98cae19acd804c11a811ada82c8f968798c3c6f3"></iframe>
+  </div>
+</div>
+
+<!-- ------------------------------------------------>
+
 
   <!-- ------------------------------------------------>
 
@@ -310,8 +369,21 @@
       score += parseInt(d3.select('#m3').html());   
     }
 
+    if (d3.select("#myCheckbox4").property("checked")){
+      score += parseInt(d3.select('#m4').html());
+    }
+
+    if (d3.select("#myCheckbox5").property("checked")){
+      score += parseInt(d3.select('#m5').html());   
+    }
+
+    if (d3.select("#myCheckbox6").property("checked")){
+      score += parseInt(d3.select('#m6').html());   
+    }
+
     d3.select("#myTotal").html(score);    
   }
+
 </script>
 
 </body>
