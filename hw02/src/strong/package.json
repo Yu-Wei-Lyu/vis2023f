@@ -1,0 +1,14 @@
+{
+  "name": "72f083c753864b86",
+  "main": "72f083c753864b86@1090.js",
+  "version": "1090.0.0",
+  "homepage": "https://observablehq.com/d/72f083c753864b86",
+  "author": {
+    "name": "YellowDuck's Workspace",
+    "url": "https://observablehq.com/@yellowduck-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
