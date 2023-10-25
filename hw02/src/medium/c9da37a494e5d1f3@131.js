@@ -6,40 +6,41 @@ function _data(FileAttachment){return(
 FileAttachment("data.json").json()
 )}
 
-function _yCounts(){return(
-new Array()
+function _birthYearStatistic(createBirthStatistic){return(
+createBirthStatistic()
 )}
 
 function _years(data){return(
 data.map(item => item.Year)
 )}
 
-function _5(yCounts,years,data)
-{
-  yCounts.length = 0;
+function _createBirthStatistic(years,data){return(
+function createBirthStatistic(){
+  var array = [];
+  array.length = 0;
   var minYear = Math.min(...years);
   var maxYear = Math.max(...years);
   for (var y = minYear; y <= maxYear; y++) {
-    yCounts.push(
+    array.push(
       {year:y, gender:"male", count:0}, 
       {year:y, gender:"female", count:0}
     );
   }
   data.forEach(x => {
     var categoryIndex = (x.Year-minYear)*2 + (x.Gender == "男" ? 0 : 1);
-    yCounts[categoryIndex].count++;
+    array[categoryIndex].count++;
   });
-  return "All data process completed";
+  return array;
 }
+)}
 
-
-function _6(Plot,yCounts){return(
+function _6(Plot,birthYearStatistic){return(
 Plot.plot({
   grid: true,
   y: {label: "count"},
   marks: [
     Plot.ruleY([0]),
-    Plot.barY(yCounts, {x: "year", y: "count"}),
+    Plot.barY(birthYearStatistic, {x: "year", y: "count"}),
   ]
 })
 )}
@@ -53,7 +54,7 @@ Inputs.form({
 })
 )}
 
-function _8(Plot,adjustmentPlot,yCounts){return(
+function _8(Plot,adjustmentPlot,birthYearStatistic){return(
 Plot.plot({
   marginTop: adjustmentPlot.mt,
   marginRight: adjustmentPlot.mr,
@@ -64,7 +65,7 @@ Plot.plot({
   y: {label: "count"},
   marks: [
     Plot.ruleY([0]),
-    Plot.barY(yCounts, {x: "year", y: "count", tip: true , fill:"gender"}),
+    Plot.barY(birthYearStatistic, {x: "year", y: "count", tip: true , fill:"gender"}),
   ]
 })
 )}
@@ -78,12 +79,12 @@ export default function define(runtime, observer) {
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
   main.variable(observer("data")).define("data", ["FileAttachment"], _data);
-  main.variable(observer("yCounts")).define("yCounts", _yCounts);
+  main.variable(observer("birthYearStatistic")).define("birthYearStatistic", ["createBirthStatistic"], _birthYearStatistic);
   main.variable(observer("years")).define("years", ["data"], _years);
-  main.variable(observer()).define(["yCounts","years","data"], _5);
-  main.variable(observer()).define(["Plot","yCounts"], _6);
+  main.variable(observer("createBirthStatistic")).define("createBirthStatistic", ["years","data"], _createBirthStatistic);
+  main.variable(observer()).define(["Plot","birthYearStatistic"], _6);
   main.variable(observer("viewof adjustmentPlot")).define("viewof adjustmentPlot", ["Inputs"], _adjustmentPlot);
   main.variable(observer("adjustmentPlot")).define("adjustmentPlot", ["Generators", "viewof adjustmentPlot"], (G, _) => G.input(_));
-  main.variable(observer()).define(["Plot","adjustmentPlot","yCounts"], _8);
+  main.variable(observer()).define(["Plot","adjustmentPlot","birthYearStatistic"], _8);
   return main;
 }
