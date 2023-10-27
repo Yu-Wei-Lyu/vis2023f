@@ -13,28 +13,38 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap'); */
-
+        
+  
         @font-face {
-            font-family:'CircleFont'; /* src: url(https://circle472.github.io/ct2022s/hw04/CircleFont.ttf);  https://github.com/circle472/ct2022s/ */
-            src: url(../data/font/CircleFont_v2.woff2); /* https://cloudconvert.com/ttf-to-woff2 */
+            font-family:'CircleFont';
+            src: url(../data/font/CircleFont_v2.woff2);
         }
 
         h3 {
-            background-color: rgba(255, 255, 0, 0.1);
             color: white; 
             text-shadow: 0 0 6px #FF0000, 0 0 6px #000000;
             font-family: 'CircleFont', 'Noto Serif JP', serif;
             font-size: 18pt;
-            border: solid 1px black;
             width: 90%;
             margin: 5px auto;
             padding: 10px;
             text-align: center;
         }
 
-        div {
+        text {
+            fill: white;
+            text-shadow: 0 0 1px #000000, 0 0 1px #000000;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 8pt;
+            width: 90%;
+            margin: 5px auto;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .div-hint {
             font-family: 'CircleFont', 'Noto Serif JP', serif;
-            font-size: 16pt;
+            font-size: 28pt;
             width: 70%;
             margin: 5px auto;
             padding: 10px;
