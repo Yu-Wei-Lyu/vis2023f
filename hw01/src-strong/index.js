@@ -11,7 +11,7 @@ d3.text("../data/csv/data.csv").then(function (data) {
         return d;
     });
 
-    //parsed_csv.sort((a, b) => b.total - a.total);
+    parsed_csv.sort((a, b) => b.total - a.total);
     
     series = d3.stack().keys(parsed_csv.columns.slice(5))(parsed_csv).map(d => (d.forEach(v => v.key = d.key), d))
     //console.log(series)
@@ -25,7 +25,7 @@ d3.text("../data/csv/data.csv").then(function (data) {
 
 //***************************************************
 function DomainConverter(student) {
-    return `${student.序號}\t${student.班級}\t${student.學號}\t${student.姓名}\t${student['GitHub 帳號']}`
+    return `${student.序號} ${student.班級} ${student.學號} ${student.姓名} ${student['GitHub 帳號']}`
 }
 
 function CreateHintSVG() {
@@ -54,6 +54,7 @@ function CreateHintSVG() {
         .selectAll("text")
         .data(score_header)
         .join("text")
+        .attr("class", "rect-text")
         .attr("x", (d, i) => (i) * rect_width + 24)
         .attr("y", 15)
         .attr("text-anchor", "middle")
@@ -61,9 +62,12 @@ function CreateHintSVG() {
         .style("font-size", 10)
         .text(d => d);
 
-    // 
     d3.select("#div1")
-        .attr("class", "div-hint")
+        .style("font-size", "28pt")
+        .style("width", "70%")
+        .style("margin", "5px auto")
+        .style("padding", "10px")
+        .style("text-align", "center")
         .append("g")
         .text("作業顏色對照表")
     
@@ -87,13 +91,15 @@ function CreateScoreSVG() {
         .padding(0.08);
 
     var x = d3.scaleLinear()
-        .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
-        //.domain([0, 100])
+        //.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
+        .domain([0, 100])
         .range([margin.left, width - margin.right]);
      
-    var yAxis = g => g.attr("transform", `translate(${margin.left},0)`)
-        .call(d3.axisLeft(y))
-        .call(g => g.selectAll(".domain").remove());
+    var yAxis = g => g.attr("transform", `translate(0,0)`)
+        
+        .call(d3.axisRight(y).tickFormat(d => d))
+        .call(g => g.selectAll("g").select("line").remove());
+        
 
     var xAxis = g => g.attr("transform", `translate(0,${margin.top})`)
         .call(d3.axisTop(x).ticks(width / 50, "s"))
@@ -132,6 +138,7 @@ function CreateScoreSVG() {
         .selectAll("text")
         .data(d => d)
         .join("text")
+        .attr("class", "rect-text")
         .attr("x", d => x(d[0]) + (x(d[1]) - x(d[0])) / 2)
         .attr("y", (d, i) => y(DomainConverter(d.data)) + 16)
         .attr("text-anchor", "middle")
@@ -147,6 +154,8 @@ function CreateScoreSVG() {
         });
     
     d3.select("#div2")
+        .style("width", "90%") 
+        .style("margin", "5px auto") 
         .node()
         .appendChild(score_svg.node());
 }
