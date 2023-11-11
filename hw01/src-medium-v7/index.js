@@ -25,7 +25,7 @@ d3.select("#div1")
 d3.text("../data/csv/data.csv").then(function (data) {
     //console.log(data)
     parsedCSV = d3.csvParseRows(data);
-    //console.log(parsedCSV);
+    console.log(parsedCSV);
 
     var container = d3.select("#div2")
         .append("table")
