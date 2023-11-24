@@ -1,4 +1,3 @@
-// 部分參考作業發布者王麗雅同學所提供之範例程式碼 https://observablehq.com/d/c84affd948a1e733
 function _1(md){return(
 md`# HW04 Sunburst`
 )}
