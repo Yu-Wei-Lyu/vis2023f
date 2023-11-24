@@ -1,0 +1,14 @@
+{
+  "name": "b77d1a9ba954960f",
+  "main": "b77d1a9ba954960f@426.js",
+  "version": "426.0.0",
+  "homepage": "https://observablehq.com/d/b77d1a9ba954960f",
+  "author": {
+    "name": "北科大-呂育瑋 Workspace",
+    "url": "https://observablehq.com/@yellowduck-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
