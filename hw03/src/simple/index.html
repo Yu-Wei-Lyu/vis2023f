@@ -14,19 +14,37 @@
 </head>
 
 <body>
+    <svg viewBox="0 0 200 10" width="100%">
+        <!-- 第一個SVG圖案 -->
+        <image xlink:href="../svg/1F.svg" x="0" y="0" width="50%" height="50%" />
+      
+        <!-- 第二個SVG圖案 -->
+        <image xlink:href="../svg/2F.svg" x="50%" y="0" width="50%" height="50%" />
+      
+        <!-- 第三個SVG圖案 -->
+        <image xlink:href="../svg/3F.svg" x="0" y="50%" width="50%" height="50%" />
+      
+        <!-- 第四個SVG圖案 -->
+        <image xlink:href="../svg/4F.svg" x="50%" y="50%" width="50%" height="50%" />
+      </svg>
+      
+      
+      
+    <div id="building">
+        <div id="floor1" class="floor"></div>
+        <div id="floor2" class="floor"></div>
+        <div id="floor3" class="floor"></div>
+        <div id="floor4" class="floor"></div>
+    </div>
+
     <div id="exerciseInfo">
         <p id="distance"></p>
         <p id="time"></p>
         <p id="calories"></p>
     </div>
-    <div id="building">
-        <div id="floor1"></div>
-        <div id="floor2"></div>
-        <div id="floor3"></div>
-        <div id="floor4"></div>
-    </div>
-    
+
     <script src="../js/floor.js"></script>
+    <script src="../js/exerciseInfo.js"></script>
 </body>
 
 </html>
