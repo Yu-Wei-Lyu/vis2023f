@@ -3,8 +3,9 @@ d3.json("../json/AerobicData.json").then((data) =>{
     var frame = 0;
     var maxFrame = data.length;
     var move = setInterval(() => {
-        let currentData = data[frame];
-        console.log(data[frame].X, data[frame].Y);
+        let currentData = [data[frame].Distance, data[frame].Time, data[frame].Calorie];
+        d3.select("#exerciseInfo").selectAll("p").data([currentData.Distance])
+        console.log(currentData);
         frame += 1;
     }, interval);
 });

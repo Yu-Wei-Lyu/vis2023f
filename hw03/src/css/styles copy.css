@@ -8,5 +8,4 @@
     box-sizing: border-box; /* 避免寬度超出，包括padding和border在內 */
     border: 1px solid #ccc; /* 可選：添加邊框以區分不同樓層 */
     margin: 10px;
-    position: relative;
 }
