@@ -1,11 +1,14 @@
 d3.json("../json/AerobicData.json").then((data) =>{
-    var interval = 1000;
+    const interval = 1000;
     var frame = 0;
-    var maxFrame = data.length;
-    var move = setInterval(() => {
-        let currentData = [data[frame].Distance, data[frame].Time, data[frame].Calorie];
-        d3.select("#exerciseInfo").selectAll("p").data([currentData.Distance])
-        console.log(currentData);
+    setInterval(() => {
+        let current = data[frame];
+        d3.select("#distance").text(`Distance: ${current.Distance}`);
+        d3.select("#time").text(`Time: ${Math.floor(current.Time / 60)}m${current.Time % 60}s`);
+        d3.select("#calorie").text(`Calorie: ${current.Calorie}`);
         frame += 1;
+        if (frame >= data.length) {
+            frame = 0;
+        }
     }, interval);
 });

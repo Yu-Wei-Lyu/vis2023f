@@ -10,3 +10,11 @@
     margin: 10px;
     position: relative;
 }
+
+.avatar {
+    border-radius: 50%;
+    position: absolute;
+    top: "0%";
+    left: "0%";
+    visibility: visible; /* visible | hidden */
+}
