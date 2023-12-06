@@ -1,6 +1,7 @@
 #building { /* <div id="building"> */
     display: flex;
     flex-wrap: wrap; /* 當元素超過總寬度時允許換行顯示 */
+    position: relative;
 }
 
 .floor { /* <div id="building"> 內所有的 <div>*/
@@ -12,9 +13,22 @@
 }
 
 .avatar {
+    position: absolute;
+}
+
+.exerciseInfoBox {
+    padding-left: 40%;
+}
+
+.pathGrid {
+    position: absolute;
+    fill: aqua;
+}
+
+.dot {
+    height: 4px;
+    width: 4px;
+    background-color: rgb(183, 0, 255);
     border-radius: 50%;
     position: absolute;
-    top: "0%";
-    left: "0%";
-    visibility: visible; /* visible | hidden */
 }
